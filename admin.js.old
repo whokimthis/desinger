@@ -1,0 +1,154 @@
+/**
+ * Admin panel ortak JavaScript 
+ */
+
+// Sayfa yüklendiğinde çalışır
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Admin JS loaded');
+    setupEditModals();
+    setupEditForms();
+    setupLogout();
+});
+
+// Modal işlemleri
+function setupEditModals() {
+    // Tüm modalleri kapat
+    const closeButtons = document.querySelectorAll('.close');
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+        });
+    });
+
+    // Modal dışı tıklama
+    window.addEventListener('click', function(event) {
+        document.querySelectorAll('.modal').forEach(modal => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+}
+
+// Edit formları
+function setupEditForms() {
+    // Edit formu işlemleri
+    const editForm = document.getElementById('editForm');
+    if (editForm) {
+        console.log('Edit form found, attaching handler');
+        editForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Edit form submitted');
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'İşleniyor...';
+            submitBtn.disabled = true;
+            
+            // Form verileri
+            const formData = new FormData(this);
+            console.log('Form data collected');
+            
+            // Manuel olarak gönder
+            fetch(window.location.pathname, {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) {
+                console.log('Response received:', response.status);
+                if (response.ok) {
+                    // Sayfayı yenile
+                    window.location.href = window.location.pathname + '?updated=true&t=' + Date.now();
+                } else {
+                    throw new Error('Form gönderimi başarısız: ' + response.status);
+                }
+            })
+            .catch(function(error) {
+                console.error('Form error:', error);
+                alert('Güncelleme sırasında bir hata oluştu: ' + error.message);
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+    }
+}
+
+// Çıkış yap
+function setupLogout() {
+    const logoutButton = document.getElementById('logoutButton');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function() {
+            // Çerezleri temizle
+            document.cookie = "adminToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "adminToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/admin/;";
+            document.cookie = "adminToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/admin;";
+            
+            // Yönlendir
+            window.location.href = '/admin/login?ref=logout&t=' + Date.now();
+        });
+    }
+}
+
+// Görsel önizleme - dosya
+function previewImage(input, previewId) {
+    const preview = document.getElementById(previewId);
+    if (!preview) return;
+    
+    preview.innerHTML = '';
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.alt = 'Preview';
+            preview.appendChild(img);
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.innerHTML = `
+            <div class="placeholder">
+                <i class="fas fa-image"></i>
+                <span>Önizleme</span>
+            </div>
+        `;
+    }
+}
+
+// Görsel önizleme - URL
+function previewImageURL(input, previewId) {
+    const preview = document.getElementById(previewId);
+    if (!preview) return;
+    
+    preview.innerHTML = '';
+    
+    if (input.value.trim()) {
+        const img = document.createElement('img');
+        img.src = input.value;
+        img.alt = 'Preview';
+        img.onerror = function() {
+            preview.innerHTML = `
+                <div class="placeholder">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Geçersiz URL</span>
+                </div>
+            `;
+        };
+        preview.appendChild(img);
+    } else {
+        preview.innerHTML = `
+            <div class="placeholder">
+                <i class="fas fa-image"></i>
+                <span>Önizleme</span>
+            </div>
+        `;
+    }
+}
+
+// Global fonksiyonlar
+window.previewImage = previewImage;
+window.previewImageURL = previewImageURL;

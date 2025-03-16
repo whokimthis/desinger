@@ -1,0 +1,206 @@
+/**
+ * responsive-custom.css
+ * Dinamik olarak mobil ayarlar yüklendiğinde uygulanacak stil tanımlamaları
+ */
+
+/* Mobil VIP Siteler */
+@media (max-width: 768px) {
+  /* VIP Siteleri CSS */
+  .vip-card-content {
+    padding: var(--vip-mobile-padding, 15px) !important;
+  }
+  
+  .vip-card-title {
+    font-size: var(--vip-mobile-title-size, 16px) !important;
+  }
+  
+  .vip-card-subtitle {
+    font-size: var(--vip-mobile-desc-size, 13px) !important;
+  }
+  
+  /* Buton ayarları - ÖNEMLİ: Taşmaları düzeltme */
+  .vip-card-button {
+    font-size: var(--vip-mobile-button-size, 13px) !important;
+    padding: 8px 12px !important;
+    justify-content: center !important;
+  }
+  
+  .vip-card-button .btn-icon {
+    margin-left: 5px !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Buton içeriği için taşma düzeltmesini kaldırıyoruz */
+  .vip-card-button .btn-text {
+    white-space: normal !important; /* nowrap yerine normal kullan */
+    overflow: visible !important; /* overflow:hidden kaldır */
+    text-overflow: clip !important; /* ellipsis yerine clip */
+    max-width: none !important; /* max-width kaldır */
+  }
+  
+  .vip-logo-container {
+    width: var(--vip-mobile-logo-width, 100px) !important;
+    height: var(--vip-mobile-logo-height, 50px) !important;
+  }
+  
+  /* Mobil görünürlük ayarları */
+  body[data-vip-mobile-title="0"] .vip-card-title {
+    display: none !important;
+  }
+  
+  body[data-vip-mobile-desc="0"] .vip-card-subtitle {
+    display: none !important;
+  }
+  
+  /* Güvenilir Siteleri CSS */
+  .trusted-card-content {
+    padding: var(--trusted-mobile-padding, 15px) !important;
+  }
+  
+  .trusted-card-title {
+    font-size: var(--trusted-mobile-title-size, 16px) !important;
+  }
+  
+  .trusted-card-subtitle {
+    font-size: var(--trusted-mobile-desc-size, 13px) !important;
+  }
+  
+  /* Güvenilir siteler butonları için taşma düzeltmeleri */
+  .trusted-card-button {
+    font-size: var(--trusted-mobile-button-size, 13px) !important;
+    padding: 8px 12px !important;
+    justify-content: center !important;
+  }
+  
+  .trusted-card-button .btn-icon {
+    margin-left: 5px !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Buton içeriği için taşma düzeltmesini kaldırıyoruz */
+  .trusted-card-button .btn-text {
+    white-space: normal !important; /* nowrap yerine normal kullan */
+    overflow: visible !important; /* overflow:hidden kaldır */
+    text-overflow: clip !important; /* ellipsis yerine clip */
+    max-width: none !important; /* max-width kaldır */
+  }
+  
+  .trusted-logo-container {
+    width: var(--trusted-mobile-logo-width, 100px) !important;
+    height: var(--trusted-mobile-logo-height, 50px) !important;
+  }
+  
+  /* Mobil görünürlük ayarları */
+  body[data-trusted-mobile-title="0"] .trusted-card-title {
+    display: none !important;
+  }
+  
+  body[data-trusted-mobile-desc="0"] .trusted-card-subtitle {
+    display: none !important;
+  }
+}
+
+/* Masaüstü VIP Siteler CSS */
+@media (min-width: 769px) {
+  .vip-card-title {
+    font-size: var(--vip-desktop-title-size, 24px) !important;
+  }
+  
+  .vip-card-subtitle {
+    font-size: var(--vip-desktop-desc-size, 16px) !important;
+  }
+  
+  .vip-card-button {
+    font-size: var(--vip-desktop-button-size, 16px) !important;
+  }
+  
+  .vip-card-content {
+    padding: var(--vip-desktop-padding, 30px) !important;
+  }
+  
+  .vip-logo-container {
+    width: var(--vip-desktop-logo-width, 160px) !important;
+    height: var(--vip-desktop-logo-height, 80px) !important;
+  }
+  
+  /* Güvenilir Siteler CSS */
+  .trusted-card-title {
+    font-size: var(--trusted-desktop-title-size, 22px) !important;
+  }
+  
+  .trusted-card-subtitle {
+    font-size: var(--trusted-desktop-desc-size, 16px) !important;
+  }
+  
+  .trusted-card-button {
+    font-size: var(--trusted-desktop-button-size, 16px) !important;
+  }
+  
+  .trusted-card-content {
+    padding: var(--trusted-desktop-padding, 25px) !important;
+  }
+  
+  .trusted-logo-container {
+    width: var(--trusted-desktop-logo-width, 160px) !important;
+    height: var(--trusted-desktop-logo-height, 80px) !important;
+  }
+}
+
+/* Tüm görünümler için genel buton düzeltmeleri */
+.vip-card-button, .trusted-card-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 5px !important;
+}
+
+/* Çok küçük kartlar için ek düzeltmeler */
+@media (max-width: 360px) {
+  .vip-card-button, .trusted-card-button {
+    padding: 6px 8px !important;
+    font-size: 11px !important;
+  }
+  
+  /* Çok dar ekranlarda ikon gizleme */
+  .vip-card-button .btn-icon, .trusted-card-button .btn-icon {
+    display: none !important;
+  }
+}
+
+/* 2 sütun düzeni için - ekstra dar butonlar */
+@media (min-width: 361px) and (max-width: 767px) {
+  /* Özellikle 2 sütun düzeninde daha kompakt butonlar */
+  .vip-grid[data-mobile-columns="2"] .vip-card-button,
+  .trusted-grid[data-mobile-columns="2"] .trusted-card-button {
+    padding: 6px 8px !important;
+    font-size: 10px !important;
+    letter-spacing: 0 !important;
+  }
+  
+  /* Buton metni kısaltma ihtiyacı olursa, burada font-size'ı daha da küçültebiliriz */
+  .vip-grid[data-mobile-columns="2"] .vip-card-button .btn-text,
+  .trusted-grid[data-mobile-columns="2"] .trusted-card-button .btn-text {
+    font-size: 10px !important;
+  }
+  
+  /* İkonlar çok küçültülebilir veya gizlenebilir */
+  .vip-grid[data-mobile-columns="2"] .vip-card-button .btn-icon,
+  .trusted-grid[data-mobile-columns="2"] .trusted-card-button .btn-icon {
+    font-size: 8px !important;
+  }
+}
+
+/* İhtiyaca göre ek düzeltmeler - 3 sütun düzeni için */
+@media (max-width: 767px) {
+  .vip-grid[data-mobile-columns="3"] .vip-card-button,
+  .trusted-grid[data-mobile-columns="3"] .trusted-card-button {
+    padding: 4px 6px !important;
+    font-size: 9px !important;
+  }
+  
+  .vip-grid[data-mobile-columns="3"] .vip-card-button .btn-icon,
+  .trusted-grid[data-mobile-columns="3"] .trusted-card-button .btn-icon {
+    display: none !important;
+  }
+}
