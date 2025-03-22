@@ -101,11 +101,22 @@ body {
   position: relative;
 }
 
+/* === Arka Plan Efektleri Container === */
+.background-effects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* === Modern Grid Efektleri === */
 
 /* Parçacık arka planı */
 #particles-js {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
@@ -115,7 +126,7 @@ body {
 
 /* Grid arka plan */
 .grid-bg {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -125,12 +136,11 @@ body {
     linear-gradient(90deg, rgba(62, 188, 250, 0.03) 1px, transparent 1px);
   background-size: 30px 30px;
   z-index: -5;
-  pointer-events: none;
 }
 
 /* Girdap efekti */
 .vortex {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
@@ -143,17 +153,15 @@ body {
     var(--color-bg-primary) 100%
   );
   z-index: -6;
-  pointer-events: none;
 }
 
 /* Glow noktalari */
 .glow-point {
-  position: fixed;
+  position: absolute;
   border-radius: 50%;
   filter: blur(80px);
   z-index: -8;
   opacity: 0.15;
-  pointer-events: none;
 }
 
 .glow-point-1 {
